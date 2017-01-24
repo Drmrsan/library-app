@@ -1,4 +1,4 @@
-class LibrariesController < ApplicationController
+class Api::V1::LibrariesController < ApplicationController
   before_action :set_library, only: [:show, :update, :destroy]
 
   # GET /libraries
@@ -46,6 +46,6 @@ class LibrariesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def library_params
-      params.require(:library).permit(:name, :adress, :phone)
+      ActiveModelSerializers::Deserialization.jsonapi_parse!(params)
     end
 end
